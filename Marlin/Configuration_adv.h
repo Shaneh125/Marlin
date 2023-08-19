@@ -287,6 +287,15 @@
 #if TEMP_SENSOR_SOC
   #define THERMAL_PROTECTION_SOC     // Halt the printer if the SoC sensor leaves the temp range below.
   #define SOC_MAXTEMP            85  // (°C)
+  //#define TEMP_BOARD_PIN -1        // Board temp sensor pin override.
+#endif
+
+//
+// SoC Sensor options
+//
+#if TEMP_SENSOR_SOC
+  #define THERMAL_PROTECTION_SOC     // Halt the printer if the SoC sensor leaves the temp range below.
+  #define SOC_MAXTEMP            85  // (°C)
 #endif
 
 /**
@@ -303,6 +312,7 @@
  * long (period), the firmware will halt the machine as a safety precaution.
  *
  * If you get false positives for "Thermal Runaway", increase
+    #if ANY(MPCTEMP, PIDTEMP)
  * THERMAL_PROTECTION_HYSTERESIS and/or THERMAL_PROTECTION_PERIOD
  */
 #if ENABLED(THERMAL_PROTECTION_HOTENDS)
@@ -563,7 +573,7 @@
 // The final temperature is calculated as (measuredTemp * GAIN) + OFFSET.
 #define TEMP_SENSOR_AD595_OFFSET  0.0
 #define TEMP_SENSOR_AD595_GAIN    1.0
-#define TEMP_SENSOR_AD8495_OFFSET 0.0
+//#define USE_CONTROLLER_FAN
 #define TEMP_SENSOR_AD8495_GAIN   1.0
 
 /**
